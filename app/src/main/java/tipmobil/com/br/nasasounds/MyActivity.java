@@ -12,7 +12,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -37,8 +39,11 @@ public class MyActivity extends Activity {
         // Get ListView object from xml
         listView = (ListView) findViewById(R.id.listView);
 
-        adapter = new ArrayAdapter<Item>(this,
-                android.R.layout.simple_list_item_1, android.R.id.text1, getRawFiles());
+        //adapter = new ArrayAdapter<Item>(this,
+        //        android.R.layout.simple_list_item_1, android.R.id.text1, getRawFiles());
+
+        adapter = new CustomListAdapter(MyActivity.this, R.layout.custom_list,getRawFiles());
+        listView.setAdapter(adapter);
 
 
         // Assign adapter to ListView
@@ -135,10 +140,10 @@ public class MyActivity extends Activity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
+        //int id = item.getItemId();
+        //if (id == R.id.action_settings) {
+        //    return true;
+       // }
         return super.onOptionsItemSelected(item);
     }
 
