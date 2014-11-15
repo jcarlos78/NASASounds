@@ -7,6 +7,9 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,6 +20,9 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.android.gms.plus.PlusClient;
+import com.google.android.gms.plus.PlusOneButton;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
@@ -24,22 +30,27 @@ import java.io.OutputStream;
 import java.lang.reflect.Field;
 
 
-public class MyActivity extends Activity {
+public class MyActivity extends FragmentActivity implements PlusOneFragment.OnFragmentInteractionListener {
 
     ListView listView ;
     ArrayAdapter<Item> adapter;
     MediaPlayer mp;
+    PlusOneFragment fragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
 
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragment = new PlusOneFragment();
+        fragmentTransaction.add(R.id.plus_one_button, fragment);
+        fragmentTransaction.commit();
+
         // Get ListView object from xml
         listView = (ListView) findViewById(R.id.listView);
 
-        //adapter = new ArrayAdapter<Item>(this,
-        //        android.R.layout.simple_list_item_1, android.R.id.text1, getRawFiles());
 
         adapter = new CustomListAdapter(MyActivity.this, R.layout.custom_list,getRawFiles());
         listView.setAdapter(adapter);
@@ -69,11 +80,6 @@ public class MyActivity extends Activity {
     }
 
     public void shareSound(int position){
-        //Item sound = (Item)listView.getItemAtPosition(position);
-        //Intent share = new Intent(Intent.ACTION_SEND);
-        //share.setType("audio/*");
-        //share.putExtra(Intent.EXTRA_STREAM, getShare(sound.arquivo));
-        //startActivity(Intent.createChooser(share, "Share Sound File"));
 
         Item sound = (Item)listView.getItemAtPosition(position);
         File dest = Environment.getExternalStorageDirectory();
@@ -203,14 +209,12 @@ public class MyActivity extends Activity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        //int id = item.getItemId();
-        //if (id == R.id.action_settings) {
-        //    return true;
-       // }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 
     public class Item {
@@ -221,6 +225,10 @@ public class MyActivity extends Activity {
         public String toString() {
             return nome;
         }
+    }
+
+    protected void onResume() {
+        super.onResume();
     }
 
 }

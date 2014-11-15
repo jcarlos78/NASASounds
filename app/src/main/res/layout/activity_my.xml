@@ -5,13 +5,32 @@
     android:background="@drawable/man"
     tools:context=".MyActivity">
 
-    <ListView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    <ListView
         android:id="@+id/listView"
-        android:textColor="#FF0000"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="@color/pitch_black"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <fragment android:name="tipmobil.com.br.nasasounds.PlusOneFragment"
+            android:id="@+id/frag"
+            android:layout_above="@+id/button1"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" />
+
+    </LinearLayout>
+
+    </LinearLayout>
 
 </RelativeLayout>
