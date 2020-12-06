@@ -1,9 +1,11 @@
 NASASounds
 ==========
 
-Muito simples porem divertido, alguns do sons clássicos originais da NASA.
+Projeto Android - Antigo e **Descontinuado**
 
-Escute e se divirta com alguns dos sons clássicos da NASA.
+Muito simples porem divertido, alguns dos sons clássicos originais da NASA.
+
+Escute e se divirta com alguns dos sons clássicos da NASA e compartilhe com seus amigos no WhatsApp.
 
 *Eagle has landed
 *Houston we have a problem
